@@ -1,0 +1,52 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+import java.util.*;
+import javax.swing.JOptionPane;
+import java.lang.*;
+import java.io.*;
+import java.util.Random;
+public class Main
+{
+    static double weeklySalary(double hoursWorked , double hourlyRate)
+    {
+        double overtime_Pay = 1.5 * hourlyRate;
+        double salary = 0.00;
+        double reg_salary = 0.00;
+        double overtime_salary = 0.00;
+        if (hoursWorked<=40)
+        {
+            salary = hoursWorked*hourlyRate;
+        }
+        else
+        {
+            salary = 40*hourlyRate + (hoursWorked-40)*overtime_Pay;
+            //salary = salary *2;
+        }
+        return salary;
+    }
+	public static void main(String[] args) 
+	{
+		System.out.println("Hello World");
+		Scanner keyboard = new Scanner(System.in);
+		double hoursWorked=0;
+		double hourlyRate=0;
+		System.out.println("Let's find out the weekly salary of the hourly employee Ms.Willie\n\n");
+		System.out.println("On average, how many hours does Ms.Willie work per week?");
+		hoursWorked = keyboard.nextDouble();
+		System.out.println("How much does she make per hour?");
+		hourlyRate = keyboard.nextDouble();
+		double sal = weeklySalary(hoursWorked, hourlyRate);
+		//double usd = double.format("%.2F", sal);
+		//double rounded_salary = (double) (Math.round(sal*100.0/100.0));
+		System.out.println("\n\n\nMs.Willie makes $"+ sal + " per week");
+		
+	}
+}
+
+
