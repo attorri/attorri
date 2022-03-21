@@ -1,0 +1,64 @@
+
+name = input("what is your name? ")
+print(name + ", let's do this") 
+birthYear = input("what year were you born? ")
+age = 2022 - int(birthYear)
+print("Y or N:")
+correctYOB = input("are you " +str(age)+"? ")
+if correctYOB == "N":
+    print("young gunner then...")
+weight = input("Enter weight ")
+metric = input("Kg or Lb? ")
+if metric == "K":
+    print("weight:")
+    print("Kilograms: "+weight)
+    Poundweight = int(weight) / 0.45
+    print("Pounds: "+str(Poundweight))
+elif metric == "Kg":
+    print("weight:")
+    print("Kilograms: "+weight)
+    Poundweight = int(weight) / 0.45
+    print("Pounds: "+str(Poundweight))
+elif metric == "KG":
+    print("weight:")
+    print("Kilograms: "+weight)
+    Poundweight = int(weight) / 0.45
+    print("Pounds: "+str(Poundweight))
+elif metric == "kg":
+    print("weight:")
+    print("Kilograms: "+weight)
+    Poundweight = int(weight) / 0.45
+    print("Pounds: "+str(Poundweight))
+elif metric == "k":
+    print("weight:")
+    print("Kilograms: "+weight)
+    Poundweight = int(weight) / 0.45
+    print("Pounds: "+str(Poundweight))
+elif metric == "L":
+    print("weight:")
+    print("Pounds: "+weight)
+    kiloweight = int(weight) * 0.45
+    print("Kilograms: "+str(kiloweight))
+elif metric == "Lb":
+    print("weight:")
+    print("Pounds: "+weight)
+    kiloweight = int(weight) * 0.45
+    print("Kilograms: "+str(kiloweight))
+elif metric == "LB":
+    print("weight:")
+    print("Pounds: "+weight)
+    kiloweight = int(weight) * 0.45
+    print("Kilograms: "+str(kiloweight))
+elif metric == "lb":
+    print("weight:")
+    print("Pounds: "+weight)
+    kiloweight = int(weight) * 0.45
+    print("Kilograms: "+str(kiloweight))
+elif metric == "lb":
+    print("weight:")
+    print("Pounds: "+weight)
+    kiloweight = int(weight) * 0.45
+    print("Kilograms: "+str(kiloweight))
+else:
+    print("invalid")
+    
