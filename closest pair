@@ -1,0 +1,190 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import java.lang.Math;
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner keyboard = new Scanner(System.in);
+		System.out.println("Hello World");
+		System.out.println("Closest pairs !");
+		System.out.println("We will find the closest pair of points in a graph with your determined point locations");
+		System.out.println("Locations will be determined by an x and y value for each point");
+		System.out.println("How many points do you want on this graph ?");
+		int pts = keyboard.nextInt();
+		int [] pt_X = new int[pts];
+		int [] pt_Y = new int[pts];
+		int pPlus = p + 1;
+		for (int i=0; i<pPlus;i++)
+		{
+		    int iPlus = i + 1;
+		    System.out.println("Point #" + iPlus);
+		    System.out.println("X = ");
+		    pt_X[i] = keyboard.nextInt();
+		    System.out.println("Y = ");
+		    pt_Y[i] = keyboard.nextInt();
+		    
+		}
+		int pMinus = pts - 1;
+		int x_tempJ;
+		int y_tempJ;
+		int x_tempK;
+		int y_tempK;
+		int psquared = pts*pts;
+		//int [] diff = new int[psquared];
+		int [][] diffX = new int[pts][pts];
+		int [][] diffY = new int [pts][pts];
+		/*
+		int [] diff_J_X_pOne = new int[pts];
+		int [] diff_J_Y_pOne = new int[pts];
+		int [] diff_K_X_pOne = new int[pts];
+		int [] diff_K_Y_pOne = new int[pts];
+		int [] diff_J_X_pTwo = new int[pts];
+		int [] diff_J_Y_pTwo = new int[pts];
+		int [] diff_K_X_pTwo = new int[pts];
+		int [] diff_K_Y_pTwo = new int[pts];
+		*/
+		int [] diff_X_pOne = new int[pts];
+		int [] diff_X_pTwo = new int[pts];
+		int [] diff_Y_pOne = new int[pts];
+		int [] diff_Y_pTwo = new int[pts];
+		int maxX;
+		int minX;
+		int maxY;
+		int minY;
+		int kPlus;
+		int dX;
+		int dY;
+		for (int j=0; j<pts; j++)
+		{
+		    x_tempJ = pt_X[j];
+		    y_tempJ = pt_Y[j];
+		    //int jPlus = j + 1;
+		    diffX[j][j] = 0;
+		    diffY[j][j] = 0;
+		    for (int k=0; k<pMinus;k++)
+		    {
+		        x_tempK = pt_X[k];
+		        y_tempK = pt_Y[k];
+		        kPlus = k + 1;
+		        if(k==j){
+		            k++;
+		        }
+		        else{
+		            if (x_tempJ<x_tempK){
+		                maxX = x_tempK;
+		                minX = x_tempJ;
+		                if (y_tempJ<y_tempK){
+		                    maxY = y_tempK;
+		                    minY = y_tempJ;
+		                }
+		                else if (y_tempJ>y_tempK){
+		                    maxY = y_tempJ;
+		                    minY = y_tempK;
+		                }
+		                else{
+		                    maxY = y_tempK;
+		                    minY = y_tempJ;
+		                }
+		            }
+		            else if (x_tempJ>x_tempK){
+		                maxX = x_tempJ;
+		                minX = x_tempK;
+		                
+		                if (y_tempJ<y_tempK){
+		                    maxY = y_tempK;
+		                    minY = y_tempJ;
+		                }
+		                else if (y_tempJ>y_tempK){
+		                    maxY = y_tempJ;
+		                    minY = y_tempK;
+		                }
+		                else{
+		                    maxY = y_tempK;
+		                    minY = y_tempJ;
+		                }
+		            }
+		            else{
+		                maxX = x_tempK;
+		                minX = x_tempJ;
+		                if (y_tempJ<y_tempK){
+		                    maxY = y_tempK;
+		                    minY = y_tempJ;
+		                }
+		                else if (y_tempJ>y_tempK){
+		                    maxY = y_tempJ;
+		                    minY = y_tempK;
+		                }
+		                else{
+		                    maxY = y_tempK;
+		                    minY = y_tempJ;
+		                }
+		            }
+		            int jTp = j*pts;
+		            int arrV = jTp + k;
+		            dX = maxX - minX;
+		            diffX[j][k] = dX;
+		            //diffX[arrV] = dX;
+		            dY = maxY - minY;
+		            diffY[j][k] = dY;
+		            //diffY[arrV] = dY;
+		            //diff_K_X_pOne = j;
+		        }
+		    }
+		}
+		int xOne=0;
+		int xTwo=0;
+		int yOne=0;
+		int yTwo=0;
+		int minDisX = diffX[0][1];
+		int minDisY = diffY[0][1];
+		int [] disX = new int[pts];
+		int [] disY = new int[pts];
+		int finalX;
+		int finalY;
+		for (int jC=0; jC<pts; jC++)
+		{
+		    for (int kC=0; kC<pts; kC++)
+		    {
+		        finalX = diffX[jC][kC];
+		        finalY = diffY[jC][kC];
+		        if (jC!=kC)
+		        {
+		            if (finalX<minDisX)
+		            {
+		                minDisX = diffX[jC][kC];
+		                xOne = jC;
+		                xTwo = kC;
+		                if (finalY<minDisY)
+		                {
+		                    minDisY = diffY[jC][kC];
+		                    yOne = jC;
+		                    yTwo = kC;
+		                }
+		            }
+		            else if (finalY<minDisY)
+		            {
+		                minDisY = diffY[jC][kC];
+		                yOne = jC;
+		                yTwo = kC;
+		            }
+		        }
+		    }
+		}
+		System.out.println("The pair with the closest x values are points #" + xOne + " and #"+ xTwo);
+		System.out.println("The pair with the closest y values are points #" + yOne + " and #"+ yTwo);
+	}
+}
+
+
