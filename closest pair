@@ -163,19 +163,22 @@ public class Main
 		        {
 		            if (finalX<minDisX)
 		            {
-		                minDisX = diffX[jC][kC];
+		                // minDisX = diffX[jC][kC];
+		                minDisX = finalX;
 		                xOne = jC;
 		                xTwo = kC;
 		                if (finalY<minDisY)
 		                {
-		                    minDisY = diffY[jC][kC];
+		                    // minDisY = diffY[jC][kC];
+		                    minDisY = finalY;
 		                    yOne = jC;
 		                    yTwo = kC;
 		                }
 		            }
 		            else if (finalY<minDisY)
 		            {
-		                minDisY = diffY[jC][kC];
+		                //minDisY = diffY[jC][kC];
+		                minDisY = finalY;
 		                yOne = jC;
 		                yTwo = kC;
 		            }
