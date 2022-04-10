@@ -1,0 +1,82 @@
+package des;
+
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import java.lang.Math;
+import java.io.*;
+import java.util.*;
+import java.net.URL;
+import java.awt.image.BufferedImage;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.AlgorithmParameters;
+import java.security.spec.KeySpec;
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
+public class ImageProcess {
+
+	public ImageProcess() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IOException, Exception
+	{
+		File bankinfo = new File("C:\\Users\\attor\\OneDrive\\Documents\\bankinfo.txt");
+		File encrypted = new File("C:\\Users\\attor\\OneDrive\\Documents\\encrypted.txt");
+		Properties properties = new Properties();
+		FileInputStream inBank = new FileInputStream(bankinfo);
+		FileOutputStream outEncrypt = new FileOutputStream(encrypted);
+		String password = "MrStudent100!";
+		byte[] salt = new byte[8];
+		SecureRandom secureRandom = new SecureRandom();
+		secureRandom.nextBytes(salt);
+		FileOutputStream saltOutFile = new FileOutputStream("salt.enc");
+		saltOutFile.write(salt);
+		saltOutFile.close();
+		SecretKeyFactory factory = SecretKeyFactory
+				.getInstance("PBKDF2WithHmacSHA1");
+		KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536,
+				256);
+		SecretKey sKey1 = factory.generateSecret(keySpec);
+		SecretKey sKey2 = new SecretKeySpec(sKey1.getEncoded(), "AES");
+		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+		cipher.init(Cipher.ENCRYPT_MODE, sKey2);
+		AlgorithmParameters params = cipher.getParameters();
+		FileOutputStream ivOutFile = new FileOutputStream("iv.enc");
+		byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+		ivOutFile.write(iv);
+		ivOutFile.close();
+		byte[] input = new byte[64];
+		int bytesRead;
+		while ((bytesRead = inBank.read(input)) != -1) {
+			byte[] output = cipher.update(input, 0, bytesRead);
+			if (output != null)
+				outEncrypt.write(output);
+		}
+		byte[] output = cipher.doFinal();
+		if (output != null)
+			outEncrypt.write(output);
+		inBank.close();
+		outEncrypt.flush();
+		outEncrypt.close();
+		System.out.println("Encryption Complete.");				
+		/*catch (InvalidKeyException | NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException
+				| IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
+
+}
